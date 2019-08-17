@@ -1,0 +1,133 @@
+/*
+ * 파일이름: default_css.css
+ * 파일설명: 홈페이지 기본 css
+ * 작성자: 김나연
+ * 버전: 1.0.0
+ * 생성일자: 2019-08-05 오후 5시 57분
+ * 최종수정일자: 2019-08-05 오후 5시 57분
+ * 최종수정자: 김나연
+ * 최종수정내용: member manager 스프링으로 변경 
+*/
+
+    @import url('https://fonts.googleapis.com/css?family=Pacifico&display=swap');
+    @import url('https://fonts.googleapis.com/css?family=Nanum+Gothic|Pacifico|Roboto:300&display=swap' rel="stylesheet");
+    
+    /* 
+    font-family: 'Pacifico', cursive;
+	font-family: 'Roboto', sans-serif;
+	font-family: 'Nanum Gothic', sans-serif;
+	기본색+포인트색: #B825F3
+	클릭 hover색: #C385DC
+	기본 옆에 배색으로 괜찮은 색: #FCE3FF	
+ 	*/
+    
+    * {
+    	margin:0; 
+    	padding: 0;
+    }
+    
+    body {
+        min-width: 900px; 
+        font-size: 0.9em;
+        font-family: 'Nanum Gothic', sans-serif;
+        min-height: 100%;
+    }
+    
+    a {
+        text-decoration: none;
+        color: inherit; 
+        width: inherit;
+    }
+    
+    /*이미지(로고, 배경화면) 작업*/
+    .logo,
+    .bkg {
+        padding: 20px 10px;
+        margin: 0 auto;
+    }
+    
+    .logo{
+        width: 350px;
+        clear: both;
+        font-family: 'Pacifico', cursive; 
+        font-size: 3.5em;
+        text-align: center;
+    }
+    .img_headLogo {
+        height: 70px;
+        border-bottom: 5px solid #B825F3;
+        display: block;
+    }
+	.bkg {
+        clear: both;
+	}
+	
+    .img_bkg {
+        background-repeat: no-repeat;
+        background-position: center; 
+        display: block;
+        background-image: url(https://images.unsplash.com/photo-1516398810565-0cb4310bb8ea?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=701&q=80);
+        height: 350px;
+    }
+    
+    /*네비게이션 바 (상단, 하단)*/
+    .nav, #right{
+        padding: 5px;
+        height: 30px;
+        margin: 15px 0 0 0;
+        text-align: center;
+        font-family: 'Roboto', sans-serif;
+    }
+    
+    .nav ul{
+        overflow: hidden;
+        margin: 0 auto;
+        font-size: 0.75em;
+    }
+    
+    nav{
+        float: right;
+    }
+    
+    nav>ul{
+        width: 500px;
+    }
+    .nav li{
+        list-style: none;
+        float: left;
+        padding: 0 5px;
+        line-height: 30px;
+        width: 50px;
+        margin: 0 auto;
+    }
+    nav a:hover{
+        background-color: #C385DC;
+        display: block;
+    }
+    
+    /*내용*/
+    article{
+        width: 700px;
+        margin: 0 auto;
+        text-align: center;
+        margin-top: 10px;
+    }
+    
+    /*푸터*/
+    footer{
+        position: relative;
+        bottom: 0px;
+        height: 30px;
+        margin-top: 100px;
+    }
+    
+    footer>div {
+        float: left;
+    }
+    
+    #right{
+        position: absolute;
+        right: 30px;
+        font-size: 0.75em;
+        line-height: 30px;
+    }

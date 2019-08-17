@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+	2019-08-13 am.10:00 
+	자동 매퍼 생성 기능을 이용: MsgSessionDao 인터페이스 이용!
+	type alias쓰려면 configuration으로 mapper까지 감싸서 사용해야 함.
+	장점: 패키지 단위로 등록 가능. VO가 한쪽으로 몰려있으면 유지보수용이
+-->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="com.ny.mm.dao.MemberStDao">
+	
+		<resultMap type="com.ny.mm.model.Member" id="MemberVO">
+			<result property="idx" column="idx"/>
+			<result property="id" column="id"/>
+			<result property="pw" column="pw"/>
+			<result property="name" column="name"/>
+			<result property="photo" column="photo"/>
+			<result property="regDate" column="regdate"/>
+		</resultMap>
+	
+		<select id="selectById" resultMap="MemberVO" >
+			select * from project_01.memberinfo 
+			where id = #{id}
+		</select>
+		
+		<insert id="insertMember" parameterType="com.ny.mm.model.Member">
+			insert into project_01.memberinfo (ID, PW, NAME, PHOTO) values (#{id}, #{pw}, #{name}, #{photo})
+		</insert>
+		
+		
+		<!-- toString넣는 이유: 문자열이 아닌 문자로 인식함. -->
+		<select id="selectTotalCount" parameterType="map" resultType="int">
+			select count(*) from project_01.memberinfo
+			<where>
+				<if test="search != null">
+					<if test="search.type == '1'.toString()">
+						<include refid="name" />
+					</if>
+					<if test="search.type == '2'.toString()">
+						<include refid="id" />
+					</if>
+					<if test="search.type == '3'.toString()">
+						<include refid="name" />
+						<include refid="id" />
+					</if>
+				</if>
+			</where>
+		</select>
+		
+		<select id="selectList" resultMap="MemberVO" parameterType="map">
+			select * from project_01.memberinfo 
+			<where>
+				<if test="search != null">
+					<if test="search.type == '1'.toString()">
+						<include refid="name" />
+					</if>
+					<if test="search.type == '2'.toString()">
+						<include refid="id" />
+					</if>
+					<if test="search.type == '3'.toString()">
+						<include refid="name" />
+						<include refid="id" />
+					</if>
+				</if>
+			</where>
+			order by regdate desc 
+			limit #{index}, #{perCnt}
+		</select>
+		
+		<sql id="name">
+			or name like concat('%', #{search.keyword}, '%')
+		</sql>
+		<sql id="id">
+			or id like concat('%', #{search.keyword}, '%')
+		</sql>
+		<!-- 
+			동적쿼리 사용 전. 하드코딩,,
+
+		<select id="selectListByName" resultMap="MemberVO" parameterType="map">
+			select * from project_01.memberinfo 
+			where name like concat('%', #{keyword}, '%')
+			order by regdate desc 
+			limit #{index}, #{perCnt}
+		</select>
+		
+		<select id="selectListById" resultMap="MemberVO" parameterType="map">
+			select * from project_01.memberinfo 
+			where id like concat('%', #{keyword}, '%')
+			order by regdate desc 
+			limit #{index}, #{perCnt}
+		</select>
+
+		<select id="selectListByBoth" resultMap="MemberVO" parameterType="map">
+			select * from project_01.memberinfo 
+			where name like concat('%', #{keyword}, '%') or id like concat('%', #{keyword}, '%')
+			order by regdate desc 
+			limit #{index}, #{perCnt}
+		</select> 
+		-->
+		
+		<update id="updateMember" parameterType="map">
+			update project_01.memberinfo 
+			set name = #{name},
+			pw = #{pw},
+			photo = #{photo} 
+			where idx = #{idx}
+		</update>
+		
+		<delete id="deleteMember">
+			delete from project_01.memberinfo 
+			where id = #{id}
+		</delete>
+		
+		<!-- ****************************************
+						REST API 용 SQL 
+			**************************************** -->
+		<select id="selectAllList" resultMap="MemberVO">
+			select * from project_01.memberinfo 
+			order by regdate desc 
+		</select>
+		
+		
+	</mapper>

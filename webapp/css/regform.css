@@ -1,0 +1,106 @@
+    @import url('https://fonts.googleapis.com/css?family=Pacifico&display=swap');
+    @import url('https://fonts.googleapis.com/css?family=Nanum+Gothic|Pacifico|Roboto:300&display=swap');
+    
+    /* 
+    font-family: 'Pacifico', cursive;
+	font-family: 'Roboto', sans-serif;
+	font-family: 'Nanum Gothic', sans-serif;
+	기본색+포인트색: #B825F3
+	클릭 hover색: #C385DC
+	기본 옆에 배색으로 괜찮은 색: #FCE3FF
+ 	*/
+    
+    
+    /*form*/
+    .wrap {
+        width: 400px;
+        margin: 50px auto;
+        font-size: 0.9em;
+        background-color: #fff;
+        border-radius: 10px;
+   		padding: 35px 20px 0;
+		box-shadow: 7px 10px 5px #C385DC;
+	}
+	
+	.wrap h2,
+	.wrap h4{
+		font-family: 'Nanum Gothic', sans-serif;
+		font-weight: bold;
+	}
+	
+	.wrap h2{
+		text-align: center;
+	}
+    
+    .wrap h4{
+        margin-top: 15px;
+        margin-bottom: 5px;
+    }
+    
+    .warning label{
+    	margin: 0px;
+    }
+    
+    #regForm {
+        width: inherit;
+        padding: 10px;
+    }
+    
+    .inputbox {
+        width: 100%;
+        display: block;
+        border: 1px solid #ccc;
+        height: 42px;
+        padding: 5px;
+        box-sizing: border-box;
+		line-height: 30px;
+    }
+    
+    .input {
+        width: 100%;
+        height: 30px;
+        float: left;
+        display: block;
+        box-sizing: border-box;
+        border: 0;
+    }
+    
+    .pnum {
+        width: 111px;
+        vertical-align: middle;
+        display: inline-block;
+    }
+    
+    #regForm>input[type=submit] {
+        width: 100%;
+        margin: 30px auto;
+        height: 42px;
+        box-sizing: border-box;
+        background-color: #B825F3;
+        border: 0px;
+        border-radius: 3px;
+        display: block;
+        color: #eee;
+    }                                                                                               
+    
+    .btn_click {
+     	width: inherit;
+    }
+    
+    .btn_click span {
+		line-height: 40px;
+        font-size: 0.85em;
+        text-align: center;
+        box-sizing: border-box;
+        cursor: pointer;
+        display: block;
+    }
+    
+    .btn_click span:first-child {
+        background-color: #C385DC; 
+		margin: 15px 0;
+	}
+    
+    .btn_click span:nth-child(2) {
+        background-color: #FCE3FF; 
+	}
