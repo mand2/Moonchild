@@ -104,8 +104,8 @@ public class RestApiController {
 	//회원수정
 	@CrossOrigin
 	@ResponseBody
-	@RequestMapping(value = "/{idx}", method = RequestMethod.PUT)
-	public int editMember(@RequestBody EditMember edit, HttpServletRequest request) {
-		return editService.editRest(request, edit);
+	@RequestMapping(method = RequestMethod.PUT)
+	public int editMember(@RequestBody EditMember edit) {
+		return editService.editRest(edit);
 	}
 }

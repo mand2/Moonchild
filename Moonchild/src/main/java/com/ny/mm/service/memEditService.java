@@ -89,7 +89,7 @@ public class memEditService {
 	/**
 	 * rest api 용
 	 * */
-	public int editRest(HttpServletRequest request, EditMember edit) {
+	public int editRest(EditMember edit) {
 		dao = template.getMapper(MemberDao.class);
 		int result = 0;
 		
