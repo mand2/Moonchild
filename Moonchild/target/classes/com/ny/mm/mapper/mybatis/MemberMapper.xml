@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+	2019-08-18 pm.1:40 
+-->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="com.ny.mm.dao.MemberDao">
+	
+		<resultMap type="com.ny.mm.model.member.Member" id="MemberVO">
+			<result property="idx" column="idx_m"/>
+			<result property="id" column="id"/>
+			<result property="pw" column="pw"/>
+			<result property="name" column="name"/>
+			<result property="photo" column="photo"/>
+			<result property="regDate" column="regdate"/>
+			<result property="phone" column="phone"/>
+		</resultMap>
+	
+		<!-- 회원한명의정보가져오기 -->
+		<select id="selectById" resultMap="MemberVO" >
+			select * from moonchild.member 
+			where id = #{id}
+		</select>
+		
+		<!-- 회원가입 -->
+		<insert id="insertMember" parameterType="com.ny.mm.model.member.Member">
+			insert into moonchild.member (ID, PW, NAME, PHOTO, PHONE) values (#{id}, #{pw}, #{name}, #{photo}, #{phone})
+		</insert>
+		
+		
+		<!-- 회원총인원/검색인원 단위:명-->
+		<!-- toString넣는 이유: 문자열이 아닌 문자로 인식함. -->
+		<select id="selectTotalCount" parameterType="map" resultType="int">
+			select count(*) from moonchild.member
+			<where>
+				<if test="search != null">
+					<if test="search.type == '1'.toString()">
+						<include refid="name" />
+					</if>
+					<if test="search.type == '2'.toString()">
+						<include refid="id" />
+					</if>
+					<if test="search.type == '3'.toString()">
+						<include refid="name" />
+						<include refid="id" />
+					</if>
+				</if>
+			</where>
+		</select>
+		
+		<!-- 회원리스트/검색리스트 단위:개/줄-->
+		<select id="selectList" resultMap="MemberVO" parameterType="map">
+			select * from moonchild.member 
+			<where>
+				<if test="search != null">
+					<if test="search.type == '1'.toString()">
+						<include refid="name" />
+					</if>
+					<if test="search.type == '2'.toString()">
+						<include refid="id" />
+					</if>
+					<if test="search.type == '3'.toString()">
+						<include refid="name" />
+						<include refid="id" />
+					</if>
+				</if>
+			</where>
+			order by regdate desc 
+			limit #{index}, #{perCnt}
+		</select>
+		
+		<!-- 동적쿼리용 SQL -->
+		<sql id="name">
+			or name like concat('%', #{search.keyword}, '%')
+		</sql>
+		<sql id="id">
+			or id like concat('%', #{search.keyword}, '%')
+		</sql>
+		
+		<!-- 회원정보수정 -->
+		<update id="updateMember" parameterType="map">
+			update moonchild.member 
+			set name = #{name},
+				pw = #{pw},
+				photo = #{photo} 
+			where idx_m = #{idx}
+		</update>
+		
+		<delete id="deleteMember">
+			delete from moonchild.member 
+			where idx_m = #{idx}
+		</delete>
+		
+		<!-- ****************************************
+						REST API 용 SQL 
+			**************************************** -->
+		<select id="selectAllList" resultMap="MemberVO">
+			select * from moonchild.member 
+			order by regdate desc 
+		</select>
+		
+		<insert id="insertMem" parameterType="com.ny.mm.model.member.Member">
+			insert into moonchild.member (ID, PW, NAME) values (#{id}, #{pw}, #{name})
+		</insert>
+		<!-- 회원정보수정 -->
+		<update id="updateMem" parameterType="com.ny.mm.model.member.EditMember">
+			update moonchild.member 
+			set name = #{name},
+				pw = #{pw} 
+			where idx_m = #{idx}
+		</update>
+		
+	</mapper>
