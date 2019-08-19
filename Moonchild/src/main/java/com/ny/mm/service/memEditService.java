@@ -95,6 +95,10 @@ public class memEditService {
 		
 		Member member = edit.toMemberRest();
 		result = dao.updateMem(member);
+
+		System.out.println("--------service-------");
+		System.out.println("mem: "+ member);
+		System.out.println("result: " + result);
 		return result;
 	}
 	
